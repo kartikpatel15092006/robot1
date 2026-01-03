@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
+@layer base {
+  :root {
+    /* Core dark theme - deep space aesthetic */
+    --background: 220 20% 4%;
+    --foreground: 210 40% 96%;
+
+    --card: 220 20% 6%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 220 20% 6%;
+    --popover-foreground: 210 40% 96%;
+
+    /* Cyan/Blue accent system */
+    --primary: 195 100% 50%;
+    --primary-foreground: 220 20% 4%;
+    --primary-glow: 195 100% 60%;
+
+    --secondary: 220 20% 12%;
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 195 80% 40%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 15%;
+    --input: 220 20% 15%;
+    --ring: 195 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Robot specific colors */
+    --robot-metal: 220 10% 70%;
+    --robot-metal-dark: 220 15% 25%;
+    --robot-eye-glow: 195 100% 65%;
+    --robot-rim-light: 195 90% 55%;
+    
+    /* Atmospheric effects */
+    --particle-color: 195 80% 70%;
+    --ambient-glow: 195 100% 50%;
+
+    /* Gradients */
+    --gradient-radial: radial-gradient(ellipse at center, hsl(var(--primary) / 0.15) 0%, transparent 70%);
+    --gradient-vignette: radial-gradient(ellipse at center, transparent 40%, hsl(var(--background)) 100%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 60px hsl(var(--primary) / 0.3);
+    --shadow-robot: 0 20px 60px hsl(var(--background) / 0.8);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-eye: all 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-head: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 195 100% 50%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 20% 12%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 220 20% 15%;
+    --sidebar-ring: 195 100% 50%;
+  }
+
+  .dark {
+    --background: 220 20% 4%;
+    --foreground: 210 40% 96%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body, #root {
+    @apply h-full w-full overflow-hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5),
+                 0 0 40px hsl(var(--primary) / 0.3),
+                 0 0 60px hsl(var(--primary) / 0.2);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
+                inset 0 0 20px hsl(var(--primary) / 0.1);
+  }
+
+  .scanline {
+    background: linear-gradient(
+      transparent 50%,
+      hsl(var(--primary) / 0.03) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+
+  .vignette {
+    background: var(--gradient-vignette);
+    pointer-events: none;
+  }
+
+  .ambient-glow {
+    background: var(--gradient-radial);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  .animate-blink {
+    animation: blink 4s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.6;
+    filter: blur(20px);
+  }
+  50% { 
+    opacity: 1;
+    filter: blur(30px);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes blink {
+  0%, 45%, 55%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
